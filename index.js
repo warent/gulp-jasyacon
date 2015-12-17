@@ -1,7 +1,6 @@
 var gutil = require('gulp-util'),
     through = require('through2'),
     path = require('path'),
-    multimatch = require('multimatch'),
     YAML = require('yaml-to-json'),
     glob = require('glob-fs')({ gitignore: true }),
     fs = require('fs');

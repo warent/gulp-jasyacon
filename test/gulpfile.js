@@ -1,7 +1,4 @@
-var assert = require('assert'),
-    es = require('event-stream'),
-    File = require('vinyl'),
-    jasyacon = require('../'),
+var jasyacon = require('../'),
     gulp = require('gulp');
 
 gulp.task("default", function() {
