@@ -9,8 +9,6 @@ var getLines = function(contents) {
   return contents.replace(/\r\n/g, '\n').split(/\n/);
 }
 
-var parsedYAMLFiles = {};
-
 var jasyacon_r = /\/\*(\s+)\!\!jasyacon (.+)(\s+)\*\//;
 
 module.exports = function(opts) {
@@ -22,12 +20,19 @@ module.exports = function(opts) {
 };
 
 var piper = function(opts) {
+
+  if (!opts.noassoc) {
+    var parsedYAMLFiles = [];
+  } else {
+    var parsedYAMLFiles = {};
+  }
+
   yamlArgs = opts.yaml || {};
 
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
     id = path.basename(file.path, path.extname(file.path));
-    parsedYAMLFiles[id] = parsedYAML;
+    !opts.noassoc ? parsedYAMLFiles[id] = parsedYAML : parsedYAMLFiles.push(parsedYAML)
   });
 
   glob.readdirSync(opts.glob);
@@ -64,14 +69,19 @@ var piper = function(opts) {
 
 var converter = function(opts) {
 
-  var parsedYAMLFiles = [];
+  if (!opts.noassoc) {
+    var parsedYAMLFiles = {};
+  } else {
+    var parsedYAMLFiles = [];
+  }
+
   yamlArgs = opts.yaml || {};
 
 
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
     id = path.basename(file.path, path.extname(file.path));
-    parsedYAMLFiles.push(parsedYAML);
+    !opts.noassoc ? parsedYAMLFiles[id] = parsedYAML : parsedYAMLFiles.push(parsedYAML)
   });
 
   glob.readdirSync(opts.glob);

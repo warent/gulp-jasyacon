@@ -1,7 +1,7 @@
 {
   "name": "gulp-jasyacon",
-  "version": "0.2.0",
-  "description": "Consolidate and replicate JSON objects scattered throughout Javascript libraries via YAML templating.",
+  "version": "1.1.0",
+  "description": "Consolidate and replicate JSON objects scattered throughout Javascript libraries via YAML templating. Alternatively, convert YAML globs into direct JSON output.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -30,5 +30,8 @@
     "event-stream": "^3.3.2",
     "gulp": "^3.9.0",
     "vinyl": "^1.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

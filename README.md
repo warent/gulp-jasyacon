@@ -4,10 +4,13 @@
 
 Occasionally we find ourselves with a lot of static JSON objects floating around our scripts, causing clutter and ugliness. *JasYaCon* (**JS**ON **YA**ML **Con**solidator) is able to convert a YAML file into a JSON object, and then place that object directly into your script wherever specified, allowing for cleaner code and extremely easy replication.
 
+The alternative use of this package is outside of Gulp. Instead, use the "nopipe" argument to retrieve the direct result returned.
+
 ## Arguments
 * (glob) glob - The glob containing all of the yaml files for processing.
 * (object) yaml - These are passed directly into [Yaml to Json]. Please refer to that package's documentation.
-* (bool) nopipe - If true, the YAML glob will be converted into an array of JSON objects and directly returned.
+* (bool) nopipe - If true, the YAML glob will be converted and directly returned.
+* (bool) noassoc - If true, the returned object will be an indexed array. By default, the returned value is an associative array based on the name of the YAML file.
 
 ## Sample Use
 First we have our yaml file. Let's say the full path is: ./src/yaml/Persons.yaml
@@ -38,7 +41,7 @@ gulp.task("default", function() {
 This will compile, creating a file with the path ./public/myScript.js
 That file will look like this:
 ```js
-var ListOfPeople = [{"name": "John", "age": 22},{"name": "Sally", "age", 51}];
+var ListOfPeople = [{"name": "John", "age": 22},{"name": "Sally", "age": 51}];
 ```
 
 ## Plugins
