@@ -86,7 +86,7 @@ var converter = function(opts) {
 
   glob.readdirSync(opts.glob);
 
-  if (parsedYAMLFiles.length == 1) {
+  if (parsedYAMLFiles.length == 1 && opts.noassoc) {
     parsedYAMLFiles = parsedYAMLFiles[0];
   }
 
