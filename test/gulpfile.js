@@ -3,6 +3,13 @@ var jasyacon = require('../'),
 
 gulp.task("default", function() {
   gulp.src(['./source/**/*.js'])
-    .pipe(jasyacon({yamlGlob: './source/yaml/**/*.yaml'}))
+    .pipe(jasyacon({glob: './source/yaml/**/*.yaml'}))
     .pipe(gulp.dest('./public/'));
 });
+
+console.log(
+  JSON.stringify(jasyacon({
+    glob: './source/yaml/**/*.yaml',
+    nopipe: true
+  }))
+);

@@ -14,8 +14,15 @@ var parsedYAMLFiles = {};
 var jasyacon_r = /\/\*(\s+)\!\!jasyacon (.+)(\s+)\*\//;
 
 module.exports = function(opts) {
+  if (!opts.nopipe) {
+    return piper(opts);
+  } else {
+    return converter(opts);
+  }
+};
 
-  yamlArgs = opts.yamlArgs || {};
+var piper = function(opts) {
+  yamlArgs = opts.yaml || {};
 
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
@@ -23,7 +30,7 @@ module.exports = function(opts) {
     parsedYAMLFiles[id] = parsedYAML;
   });
 
-  glob.readdirSync(opts.yamlGlob);
+  glob.readdirSync(opts.glob);
 
   return through.obj(function(file, enc, cb) {
     if (file.isNull()) {
@@ -51,6 +58,27 @@ module.exports = function(opts) {
       this.emit('error', new gutil.PluginError('gulp-jasyacon', err));
     }
 
-    cb();
+      cb();
   });
-};
+}
+
+var converter = function(opts) {
+
+  var parsedYAMLFiles = [];
+  yamlArgs = opts.yaml || {};
+
+
+  glob.use(function (file) {
+    parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
+    id = path.basename(file.path, path.extname(file.path));
+    parsedYAMLFiles.push(parsedYAML);
+  });
+
+  glob.readdirSync(opts.glob);
+
+  if (parsedYAMLFiles.length == 1) {
+    parsedYAMLFiles = parsedYAMLFiles[0];
+  }
+
+  return parsedYAMLFiles;
+}
