@@ -32,6 +32,11 @@ var piper = function(opts) {
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
     id = path.basename(file.path, path.extname(file.path));
+    if (parsedYAML) {
+      if (parsedYAML.length == 1) {
+        parsedYAML = parsedYAML[0];
+      }
+    }
     !opts.noassoc ? parsedYAMLFiles[id] = parsedYAML : parsedYAMLFiles.push(parsedYAML)
   });
 
@@ -81,8 +86,10 @@ var converter = function(opts) {
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
     id = path.basename(file.path, path.extname(file.path));
-    if (parsedYAML.length == 1) {
-      parsedYAML = parsedYAML[0];
+    if (parsedYAML) {
+      if (parsedYAML.length == 1) {
+        parsedYAML = parsedYAML[0];
+      }
     }
     !opts.noassoc ? parsedYAMLFiles[id] = parsedYAML : parsedYAMLFiles.push(parsedYAML)
   });
