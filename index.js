@@ -81,14 +81,13 @@ var converter = function(opts) {
   glob.use(function (file) {
     parsedYAML = YAML(fs.readFileSync(file.path).toString(), yamlArgs);
     id = path.basename(file.path, path.extname(file.path));
+    if (parsedYAML.length == 1) {
+      parsedYAML = parsedYAML[0];
+    }
     !opts.noassoc ? parsedYAMLFiles[id] = parsedYAML : parsedYAMLFiles.push(parsedYAML)
   });
 
   glob.readdirSync(opts.glob);
-
-  if (parsedYAMLFiles.length == 1 && opts.noassoc) {
-    parsedYAMLFiles = parsedYAMLFiles[0];
-  }
 
   return parsedYAMLFiles;
 }

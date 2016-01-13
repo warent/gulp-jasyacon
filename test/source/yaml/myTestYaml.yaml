@@ -1,5 +1,6 @@
 ---
-  someData: Hello World!
-
----
-  someData: Hello Multi World!
+  someData:
+    subKey: "Some subkey"
+    otherSubkey: "Some other subkey"
+  someMoreData:
+    subOtherKey: "Should go on"
