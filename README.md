@@ -1,7 +1,5 @@
 # Gulp JasYaCon
 
-### *Note: This package is highly unstable and subject to backwards-incompatible changes*
-
 Occasionally we find ourselves with a lot of static JSON objects floating around our scripts, causing clutter and ugliness. *JasYaCon* (**JS**ON **YA**ML **Con**solidator) is able to convert a YAML file into a JSON object, and then place that object directly into your script wherever specified, allowing for cleaner code and extremely easy replication.
 
 The alternative use of this package is outside of Gulp. Instead, use the "nopipe" argument to retrieve the direct result returned.

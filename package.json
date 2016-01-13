@@ -1,6 +1,6 @@
 {
   "name": "gulp-jasyacon",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Consolidate and replicate JSON objects scattered throughout Javascript libraries via YAML templating. Alternatively, convert YAML globs into direct JSON output.",
   "main": "index.js",
   "scripts": {
